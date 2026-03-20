@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexusQueue — Sophisticated Job Processing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════════ -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-mark">NQ</div>
+    NexusQueue
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#performance">Performance</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#docs">Docs</a></li>
+    <li><a href="#" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+
+<!-- ══════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <div class="hero-badge">
+    <span class="dot"></span>
+    v3.2 — Now with Python support
+  </div>
+
+  <h1>Process Billions of Jobs<br><em>Without Losing Sleep</em></h1>
+
+  <p>Thousands of applications rely on NexusQueue for background jobs with advanced
+     workflows, distributed concurrency, and enterprise-grade reliability.</p>
+
+  <div class="hero-actions">
+    <a href="#" class="btn-primary">Upgrade to NexusQueue Pro →</a>
+    <a href="#features" class="btn-outline">Explore Features</a>
+  </div>
+
+  <!-- Mock Dashboard -->
+  <div class="hero-dashboard">
+    <div class="dashboard-bar">
+      <div class="dot-r"></div>
+      <div class="dot-y"></div>
+      <div class="dot-g"></div>
+      <div class="dashboard-url">app.nexusqueue.io/dashboard</div>
+    </div>
+
+    <div class="dashboard-body">
+      <!-- Sidebar -->
+      <div class="dash-sidebar">
+        <div class="dash-nav-item active">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+          </svg>
+          Overview
+        </div>
+        <div class="dash-nav-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          Queues
+        </div>
+        <div class="dash-nav-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          </svg>
+          Jobs
+        </div>
+        <div class="dash-nav-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+          Analytics
+        </div>
+        <div class="dash-nav-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.07 4.93l-1.41 1.41M5.34 17.66l-1.41 1.41M20 12h-2M6 12H4
+                     M17.66 17.66l-1.41-1.41M6.75 6.75L5.34 5.34"/>
+          </svg>
+          Settings
+        </div>
+      </div>
+
+      <!-- Main panel -->
+      <div class="dash-main">
+        <div class="dash-header">
+          <div class="dash-title">Queue Overview</div>
+          <div style="font-size:0.75rem;color:var(--muted);">Last updated: just now</div>
+        </div>
+
+        <div class="dash-stats">
+          <div class="stat-card">
+            <div class="stat-label">Processed</div>
+            <div class="stat-val green" id="counter1">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Running</div>
+            <div class="stat-val blue">48</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Queued</div>
+            <div class="stat-val">1,204</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Failed</div>
+            <div class="stat-val orange">3</div>
+          </div>
+        </div>
+
+        <table class="job-table">
+          <thead>
+            <tr>
+              <th>Job ID</th>
+              <th>Worker</th>
+              <th>Queue</th>
+              <th>Status</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-family:'DM Mono',monospace;color:var(--muted)">#j-8821</td>
+              <td>GenerateReport</td>
+              <td>analytics</td>
+              <td><span class="status-badge completed">● Completed</span></td>
+              <td style="color:var(--muted);font-family:'DM Mono',monospace">1.2s</td>
+            </tr>
+            <tr>
+              <td style="font-family:'DM Mono',monospace;color:var(--muted)">#j-8822</td>
+              <td>SendEmailBatch</td>
+              <td>mailer</td>
+              <td><span class="status-badge running">● Running</span></td>
+              <td style="color:var(--muted);font-family:'DM Mono',monospace">0.4s</td>
+            </tr>
+            <tr>
+              <td style="font-family:'DM Mono',monospace;color:var(--muted)">#j-8823</td>
+              <td>ProcessPayment</td>
+              <td>billing</td>
+              <td><span class="status-badge failed">● Failed</span></td>
+              <td style="color:var(--muted);font-family:'DM Mono',monospace">5.1s</td>
+            </tr>
+            <tr>
+              <td style="font-family:'DM Mono',monospace;color:var(--muted)">#j-8824</td>
+              <td>ResizeImages</td>
+              <td>media</td>
+              <td><span class="status-badge scheduled">● Scheduled</span></td>
+              <td style="color:var(--muted);font-family:'DM Mono',monospace">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div><!-- /dash-main -->
+    </div><!-- /dashboard-body -->
+  </div><!-- /hero-dashboard -->
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     MARQUEE
+════════════════════════════════════════════ -->
+<div class="marquee-wrap">
+  <div class="marquee-label">Trusted by engineering teams at</div>
+  <div style="overflow:hidden">
+    <div class="marquee-track">
+      <span class="marquee-item">Stripe</span>
+      <span class="marquee-item">Vercel</span>
+      <span class="marquee-item">Linear</span>
+      <span class="marquee-item">Notion</span>
+      <span class="marquee-item">Figma</span>
+      <span class="marquee-item">Shopify</span>
+      <span class="marquee-item">Intercom</span>
+      <span class="marquee-item">Loom</span>
+      <span class="marquee-item">Retool</span>
+      <span class="marquee-item">PlanetScale</span>
+      <span class="marquee-item">Fly.io</span>
+      <span class="marquee-item">Railway</span>
+      <!-- duplicate set for seamless loop -->
+      <span class="marquee-item">Stripe</span>
+      <span class="marquee-item">Vercel</span>
+      <span class="marquee-item">Linear</span>
+      <span class="marquee-item">Notion</span>
+      <span class="marquee-item">Figma</span>
+      <span class="marquee-item">Shopify</span>
+      <span class="marquee-item">Intercom</span>
+      <span class="marquee-item">Loom</span>
+      <span class="marquee-item">Retool</span>
+      <span class="marquee-item">PlanetScale</span>
+      <span class="marquee-item">Fly.io</span>
+      <span class="marquee-item">Railway</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     FEATURES GRID
+════════════════════════════════════════════ -->
+<section id="features">
+  <div class="section-header reveal">
+    <div class="section-label">Core Foundation</div>
+    <h2 class="section-title">Everything you need to build reliable async systems</h2>
+    <p class="section-desc">NexusQueue builds on a rock-solid open-source foundation.
+       Pro unlocks the advanced features that scale with you.</p>
+  </div>
+
+  <div class="features-grid reveal">
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-title">Reliability</div>
+      <div class="feature-desc">Persistent background jobs with automatic retries,
+        error handling, and transaction safety backed by your database.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+      <div class="feature-title">Consistency</div>
+      <div class="feature-desc">Guaranteed job execution with database-backed
+        persistence, ACID compliance, and exactly-once semantics.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <div class="feature-title">Observability</div>
+      <div class="feature-desc">Built-in instrumentation, job retention, and a
+        real-time dashboard for monitoring execution and debugging failures.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon blue">🔀</div>
+      <div class="feature-title">Workflows</div>
+      <div class="feature-desc">Orchestrate complex multi-step processes with DAG-based
+        workflows, cascading context, and sub-workflow composition.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon blue">🌐</div>
+      <div class="feature-title">Smart Engine</div>
+      <div class="feature-desc">Advanced concurrency control with global limits, rate
+        limiting, queue partitioning, and burst mode across your cluster.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon orange">🧩</div>
+      <div class="feature-title">Extensions</div>
+      <div class="feature-desc">Decorators, relay, lifecycle hooks, job recording,
+        chains, and structured args for maximum developer productivity.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ══════════════════════════════════════════
+     SPLIT — WORKFLOWS
+════════════════════════════════════════════ -->
+<section id="performance">
+  <div class="split-section reveal">
+
+    <!-- Left: copy -->
+    <div class="split-content">
+      <div class="section-label">Advanced Workflows</div>
+      <h2 class="section-title">Orchestrate complex pipelines with ease</h2>
+      <p class="section-desc">Build multi-step workflows for AI tasks, billing pipelines,
+         media processing, and reporting systems that require reliable coordination
+         across distributed jobs.</p>
+
+      <ul class="feature-list">
+        <li>
+          <div class="check">✓</div>
+          <div>
+            <div class="li-title">Fully Distributed</div>
+            <div class="li-desc">Workflows run across nodes, ensuring high availability
+              and fault-tolerant execution at any scale.</div>
+          </div>
+        </li>
+        <li>
+          <div class="check">✓</div>
+          <div>
+            <div class="li-title">Cascading Context</div>
+            <div class="li-desc">Pass cumulative context between jobs seamlessly.
+              Build workflows from plain functions.</div>
+          </div>
+        </li>
+        <li>
+          <div class="check">✓</div>
+          <div>
+            <div class="li-title">Nested Sub-Workflows</div>
+            <div class="li-desc">Compose complex workflows hierarchically for better
+              organization and reusability.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Right: code + viz -->
+    <div>
+      <div class="code-block">
+        <div class="code-header">
+          <span>lib/myapp/workflow.ex</span>
+          <span class="lang-pill">Elixir</span>
+        </div>
+        <div class="code-content"><pre><span class="kw">defmodule</span> <span class="fn">MyApp.Workflow</span> <span class="kw">do</span>
+  <span class="kw">alias</span> <span class="fn">NexusQueue.Workflow</span>
+
+  <span class="kw">def</span> <span class="fn">invoke</span>(params) <span class="kw">do</span>
+    Workflow.<span class="fn">new</span>()
+    |> Workflow.<span class="fn">put_context</span>(params)
+    |> Workflow.<span class="fn">add_step</span>(:fetch, &amp;fetch_data/1)
+    |> Workflow.<span class="fn">add_step</span>(:process,
+         &amp;process/1, deps: :fetch)
+    |> Workflow.<span class="fn">add_step</span>(:notify,
+         &amp;notify/1, deps: :process)
+    |> Workflow.<span class="fn">run</span>()
+  <span class="kw">end</span>
+<span class="kw">end</span></pre></div>
+      </div>
+
+      <div class="workflow-viz" style="margin-top:16px">
+        <div style="font-size:0.7rem;color:var(--muted);margin-bottom:12px;
+                    letter-spacing:0.06em;text-transform:uppercase">Execution Graph</div>
+        <div class="wf-row">
+          <span class="wf-node active">● FETCH</span>
+          <span class="wf-arrow">──►</span>
+          <span class="wf-node running">◉ PROCESS</span>
+          <span class="wf-arrow">──►</span>
+          <span class="wf-node pending">○ NOTIFY</span>
+        </div>
+        <div class="wf-row" style="margin-top:8px;font-size:0.72rem;color:var(--muted)">
+          <span style="color:var(--accent)">✓ completed</span>&nbsp;&nbsp;
+          <span style="color:var(--accent2)">◉ running</span>&nbsp;&nbsp;
+          <span>○ pending</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ══════════════════════════════════════════
+     SPLIT — SMART CONCURRENCY (reversed)
+════════════════════════════════════════════ -->
+<section>
+  <div class="split-section reverse reveal">
+
+    <!-- Left (visually right due to rtl): code -->
+    <div>
+      <div class="code-block">
+        <div class="code-header">
+          <span>config/queues.toml</span>
+          <span class="lang-pill" style="background:rgba(91,142,245,0.1);color:var(--accent2)">Config</span>
+        </div>
+        <div class="code-content"><pre><span class="cm"># Smart engine with global controls</span>
+[queues.billing]
+  local_limit  = <span class="num">5</span>
+  global_limit = <span class="num">20</span>
+  rate_limit   = {
+    allowed = <span class="num">500</span>,
+    period  = <span class="str">"1m"</span>
+  }
+
+[queues.media]
+  global_limit = <span class="num">10</span>
+  partition    = {
+    args = [<span class="str">"account_id"</span>]
+  }
+
+[queues.exports]
+  global_limit = <span class="num">1</span>
+  burst_limit  = <span class="num">3</span></pre></div>
+      </div>
+    </div>
+
+    <!-- Right (visually left): copy -->
+    <div class="split-content">
+      <div class="section-label">Smart Concurrency</div>
+      <h2 class="section-title">Fine-grained control across your cluster</h2>
+      <p class="section-desc">NexusQueue Pro's Smart engine provides advanced concurrency
+         control. With global limits, rate limiting, partitioning for granular control,
+         and burst mode to maximize throughput.</p>
+
+      <ul class="feature-list">
+        <li>
+          <div class="check" style="background:rgba(91,142,245,0.1);
+                                    border-color:rgba(91,142,245,0.3);
+                                    color:var(--accent2)">✓</div>
+          <div>
+            <div class="li-title">Granular Partitioning</div>
+            <div class="li-desc">Split queues into partitions, each with independent
+              concurrency and rate limits.</div>
+          </div>
+        </li>
+        <li>
+          <div class="check" style="background:rgba(91,142,245,0.1);
+                                    border-color:rgba(91,142,245,0.3);
+                                    color:var(--accent2)">✓</div>
+          <div>
+            <div class="li-title">Distributed Rate Limiting</div>
+            <div class="li-desc">Control execution rates across your entire cluster
+              within configurable time windows.</div>
+          </div>
+        </li>
+        <li>
+          <div class="check" style="background:rgba(91,142,245,0.1);
+                                    border-color:rgba(91,142,245,0.3);
+                                    color:var(--accent2)">✓</div>
+          <div>
+            <div class="li-title">Burst Performance</div>
+            <div class="li-desc">Temporarily exceed per-partition limits when spare
+              capacity is available in the system.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     STATS
+════════════════════════════════════════════ -->
+<section class="stats-section">
+  <div style="text-align:center" class="reveal">
+    <div class="section-label">By the Numbers</div>
+    <h2 class="section-title" style="margin:0 auto">Fewer queries. Faster processing.</h2>
+    <p class="section-desc" style="margin:12px auto 0">The Smart engine delivers
+       dramatically reduced database load with smarter batching and async tracking.</p>
+  </div>
+
+  <div class="stats-grid reveal">
+    <div class="stat-item">
+      <div class="stat-big" data-target="92">0</div>
+      <div style="font-size:1.1rem;font-weight:700;margin-bottom:6px">Fewer Queries</div>
+      <div class="stat-desc">Batched, parameterized inserts reduce DB load dramatically</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-big blue" data-target="96">0</div>
+      <div style="font-size:1.1rem;font-weight:700;margin-bottom:6px">Fewer Transactions</div>
+      <div class="stat-desc">Async tracking processes jobs with far fewer round trips</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-big" data-target="10">0</div>
+      <div style="font-size:1.1rem;font-weight:700;margin-bottom:6px">Throughput Gain</div>
+      <div class="stat-desc">Process 10x more jobs per second vs vanilla queues</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-big blue" data-target="99">0</div>
+      <div style="font-size:1.1rem;font-weight:700;margin-bottom:6px">Uptime SLA</div>
+      <div class="stat-desc">Enterprise-grade reliability with accurate job recovery</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════════════ -->
+<section id="testimonials">
+  <div class="section-header reveal" style="text-align:center">
+    <div class="section-label">Testimonials</div>
+    <h2 class="section-title" style="margin:0 auto">Loved by engineers worldwide</h2>
+  </div>
+
+  <div class="testimonials-grid reveal">
+    <div class="testimonial">
+      <div class="testimonial-quote">"The best infrastructure decision we've made.
+        NexusQueue handles our billing pipeline with zero downtime. The workflow
+        primitives are genuinely delightful to use."</div>
+      <div class="testimonial-author">
+        <div class="avatar">AK</div>
+        <div>
+          <div class="author-name">Aisha Khan</div>
+          <div class="author-role">Staff Engineer, Finova</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial">
+      <div class="testimonial-quote">"We moved from Sidekiq to NexusQueue and the
+        difference is night and day. The observability alone is worth the upgrade.
+        Our on-call burden dropped by 70%."</div>
+      <div class="testimonial-author">
+        <div class="avatar" style="background:linear-gradient(135deg,var(--accent3),#ff5f57)">MR</div>
+        <div>
+          <div class="author-name">Marcus Reid</div>
+          <div class="author-role">Platform Lead, Luminary</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial">
+      <div class="testimonial-quote">"NexusQueue Pro is probably the greatest library
+        I've ever integrated. For a very reasonable cost, the value you get for complex
+        async systems is completely mind-blowing."</div>
+      <div class="testimonial-author">
+        <div class="avatar" style="background:linear-gradient(135deg,#c792ea,var(--accent2))">SL</div>
+        <div>
+          <div class="author-name">Soren Lindqvist</div>
+          <div class="author-role">Founder, DevCraft</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     CTA
+════════════════════════════════════════════ -->
+<section class="cta-section" id="pricing">
+  <div class="reveal">
+    <div class="section-label" style="text-align:center">Get Started</div>
+    <h2 class="section-title">Ready to build async systems<br>
+      <em style="color:var(--accent)">with confidence?</em></h2>
+    <p class="section-desc">Join thousands of teams that rely on NexusQueue Pro
+       for their most critical background jobs.</p>
+    <div class="hero-actions" style="margin-top:40px">
+      <a href="#" class="btn-primary">Check Out Plans &amp; Pricing →</a>
+      <a href="#" class="btn-outline">Schedule a Demo</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-grid">
+
+    <!-- Brand -->
+    <div class="footer-brand">
+      <a href="#" class="nav-logo" style="margin-bottom:4px;display:inline-flex">
+        <div class="logo-mark">NQ</div>
+        NexusQueue
+      </a>
+      <p>Sophisticated background job processing for modern applications.
+         Built for scale, designed for developers.</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="your@email.com">
+        <button>Subscribe</button>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Releases</a></li>
+        <li><a href="#">Enterprise</a></li>
+        <li><a href="#">Changelog</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#">Documentation</a></li>
+        <li><a href="#">API Reference</a></li>
+        <li><a href="#">Articles</a></li>
+        <li><a href="#">Guides</a></li>
+        <li><a href="#">Brand Assets</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">Pairing Sessions</a></li>
+        <li><a href="#">Email Support</a></li>
+        <li><a href="#">Status Page</a></li>
+        <li><a href="#">Community</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Trademarks</a></li>
+      </ul>
+    </div>
+
+  </div><!-- /footer-grid -->
+
+  <div class="footer-bottom">
+    <span>© 2026 NexusQueue. All rights reserved.</span>
+    <span>Built with care for developers everywhere.</span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
