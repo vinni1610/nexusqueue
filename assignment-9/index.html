@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MP3 to Video Converter Online - Free & No Watermark</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="#0B5ADB"/>
+          <path d="M10 22V10l14 6-14 6z" fill="#fff"/>
+        </svg>
+        <span>Kactii</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#">Products &amp; Services <span class="chevron">▾</span></a></li>
+        <li><a href="#">Tools <span class="chevron">▾</span></a></li>
+        <li><a href="#">Resources <span class="chevron">▾</span></a></li>
+        <li><a href="#">Pricing</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#" class="btn-nav-ghost">Log in</a>
+        <a href="#" class="btn-nav-primary">Get Started Free</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <!-- Mobile drawer -->
+    <div class="nav-drawer" id="navDrawer">
+      <a href="#">Products &amp; Services</a>
+      <a href="#">Tools</a>
+      <a href="#">Resources</a>
+      <a href="#">Pricing</a>
+      <div class="drawer-divider"></div>
+      <div class="drawer-actions">
+        <a href="#" class="btn-nav-ghost">Log in</a>
+        <a href="#" class="btn-nav-primary">Get Started Free</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-left">
+          <h1>MP3 to Video Converter Online</h1>
+          <p class="subtitle">Convert your MP3 (.mp3) file to Video in seconds straight from your browser. No installs. No watermarks. 100% free.</p>
+
+          <!-- UPLOAD BOX -->
+          <div class="upload-box" id="uploadBox">
+            <input type="file" id="fileInput" accept=".mp3,audio/mpeg" hidden />
+            <div class="upload-left">
+              <div class="upload-icon-wrap">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                </svg>
+              </div>
+              <p class="upload-main">Drop your file here to upload</p>
+            </div>
+            <div class="upload-right">
+              <div class="upload-illustration">
+                <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="10" y="20" width="50" height="60" rx="6" fill="#dce8ff" stroke="#0B5ADB" stroke-width="1.5"/>
+                  <rect x="18" y="32" width="34" height="4" rx="2" fill="#0B5ADB" opacity=".4"/>
+                  <rect x="18" y="42" width="26" height="4" rx="2" fill="#0B5ADB" opacity=".3"/>
+                  <rect x="18" y="52" width="30" height="4" rx="2" fill="#0B5ADB" opacity=".2"/>
+                  <circle cx="68" cy="30" r="16" fill="#0B5ADB" opacity=".15"/>
+                  <path d="M62 30l8-5v10l-8-5z" fill="#0B5ADB"/>
+                </svg>
+              </div>
+              <p class="upload-sub">Click or drag &amp; drop to upload your file</p>
+              <button class="btn-select" id="browseBtn">Select a file</button>
+            </div>
+          </div>
+
+          <!-- FILE SELECTED STATE -->
+          <div class="file-info" id="fileInfo" hidden>
+            <div class="file-row">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+              </svg>
+              <span id="fileName">file.mp3</span>
+              <button class="remove-btn" id="removeBtn" aria-label="Remove file">✕</button>
+            </div>
+            <div class="format-row">
+              <label for="formatSelect">Convert to:</label>
+              <select id="formatSelect">
+                <option value="mp4">MP4</option>
+                <option value="avi">AVI</option>
+                <option value="mkv">MKV</option>
+                <option value="mov">MOV</option>
+                <option value="webm">WEBM</option>
+                <option value="flv">FLV</option>
+              </select>
+            </div>
+            <button class="btn-primary" id="convertBtn">Convert</button>
+          </div>
+
+          <!-- PROGRESS STATE -->
+          <div class="progress-wrap" id="progressWrap" hidden>
+            <p id="progressLabel">Converting...</p>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+          </div>
+
+          <!-- DONE STATE -->
+          <div class="done-wrap" id="doneWrap" hidden>
+            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+            </svg>
+            <p class="done-title">Conversion complete!</p>
+            <a class="btn-primary" id="downloadBtn" href="#" download>Download Video</a>
+            <button class="btn-ghost" id="convertAnotherBtn">Convert another file</button>
+          </div>
+
+          <!-- TRUSTPILOT -->
+          <div class="trust">
+            <div class="trust-stars">
+              <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star half">★</span>
+            </div>
+            <span>Rated 4.6 out of 5 on Trustpilot</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY SECTION -->
+  <section class="why">
+    <div class="container">
+      <h2 class="reveal">Why choose Kactii?</h2>
+      <div class="features-grid">
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="feature-icon-wrap">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#0B5ADB" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 11-.99-3.467l2.31-.66a2.25 2.25 0 001.632-2.163zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 01-.99-3.467l2.31-.66A2.25 2.25 0 009 15.553z"/></svg>
+          </div>
+          <h3>47+ Formats</h3>
+          <p>Convert from MP3 to Video but also 47+ other formats.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="feature-icon-wrap">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#0B5ADB" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3>100% Free</h3>
+          <p>No signups, no fees, no hidden restrictions. Convert MP3 to Video directly in your browser for free.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3">
+          <div class="feature-icon-wrap">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#0B5ADB" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+          </div>
+          <h3>Secure</h3>
+          <p>We take your security seriously. All file transfers use 256-bit SSL encryption.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-4">
+          <div class="feature-icon-wrap">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#0B5ADB" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"/></svg>
+          </div>
+          <h3>Online</h3>
+          <p>No installs needed; convert MP3 to Video right from your browser, on any device, anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW TO SECTION -->
+  <section class="howto">
+    <div class="container">
+      <h2 class="reveal">How to convert MP3 to Video?</h2>
+      <div class="howto-inner">
+        <div class="howto-text reveal">
+          <div class="steps">
+          <div class="step">
+            <div>
+              <h3>1. Upload your MP3 file</h3>
+              <p>Start by dragging and dropping your MP3 file into the upload area, or click to browse your device and select your file in the list.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>2. Choose Video format</h3>
+              <p>Next, pick Video as the format you'd like to convert your video into. Alternatively, we support +47 formats that you can choose from. When you're ready, hit the Convert button.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>3. Download your converted Video</h3>
+              <p>Once the conversion is complete, you'll get a download link right away. Just click to save the file to your device. It's fast, easy, and doesn't require any software installation.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>4. (Optional) Transcribe your Video to text</h3>
+              <p>When your file is converted, you can use Kactii video to text converter to get an accurate transcript.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="howto-image reveal reveal-delay-2">
+        <div class="converter-diagram">
+          <div class="diagram-center">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke="#0B5ADB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="fmt-badge fmt-mp3">
+            <span class="fmt-icon">🎵</span> MP3
+          </div>
+          <div class="fmt-badge fmt-mp4">
+            <span class="fmt-icon">🎬</span> MP4
+          </div>
+          <div class="fmt-badge fmt-mov">
+            <span class="fmt-icon">📹</span> MOV
+          </div>
+          <div class="fmt-badge fmt-wav">
+            <span class="fmt-icon">🎧</span> WAV
+          </div>
+          <div class="fmt-badge fmt-m4a">
+            <span class="fmt-icon">🎼</span> M4A
+          </div>
+          <div class="fmt-badge fmt-vid">
+            <span class="fmt-icon">📄</span> Video &amp; Audio
+          </div>
+        </div>
+      </div>
+      </div><!-- end howto-inner -->
+    </div><!-- end container -->
+  </section>
+
+  <!-- PROSE SECTION -->
+  <section class="prose-section">
+    <div class="container reveal">
+      <h2>Free Online MP3 to Video Converter</h2>
+      <p>Need to convert your audio file from MP3 to Video? It's simple. Just upload your file, choose the output format, and click 'Convert'. That's it — no downloads, no complicated software, and no hidden costs. Our tool is designed to be fast, secure, and completely free, so you can turn your files into the format you need in seconds.</p>
+      <p>Whether you're converting audio for sharing, editing, or playback on different devices, our converter ensures high-quality output every time. After your conversion, you'll also have the option to <a href="#">transcribe video to text</a>, making it easy to turn your Video files into accurate, editable text in just a few clicks.</p>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="faq">
+    <div class="container">
+      <h2 class="reveal">Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span>What is a MP3 file?</span>
+            <svg class="faq-arrow" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>MP3 is the ubiquitous lossy audio format that shrank the music industry onto the early Internet. Employing perceptual coding, it removes frequencies masked by louder sounds, producing acceptable fidelity at 128–320 kbps. The Fraunhofer team finalised MPEG-1 Layer III in 1994, but it wasn't until Winamp (1997) and Napster (1999) that MP3 exploded. Patent pools expired between 2012–2017, freeing open-source encoders like LAME. Streaming giants now favour AAC or Opus, yet MP3 remains the safest choice for maximum backward compatibility.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span>What is a Video file?</span>
+            <svg class="faq-arrow" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>A video file is a digital container that stores moving images, often paired with audio and metadata such as subtitles, chapters, and cover art. Common extensions include .mp4, .avi, .mkv, and .mov. Inside the container, you'll typically find compressed streams encoded with codecs like H.264, H.265/HEVC, or VP9 for video, and AAC or MP3 for audio. Video files balance size and quality through compression, making them practical for streaming, archiving, and editing.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span>How to open a MP3 file?</span>
+            <svg class="faq-arrow" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>Every operating system, car stereo, game console, and smart speaker plays MP3. For editing, Audacity or Pro Tools convert to 32-bit float internally. To reduce size for podcasts, re-encode to mono 96 kbps using LAME's variable bit-rate presets.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span>How to open a Video file?</span>
+            <svg class="faq-arrow" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>Most video files can be opened with VLC Media Player, which supports virtually all formats. On Windows, the built-in Movies & TV app handles common formats like MP4 and AVI. On macOS, QuickTime Player works well for most containers. For editing, tools like DaVinci Resolve or Adobe Premiere support all major video formats.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED TOOLS -->
+  <section class="related">
+    <div class="container">
+      <h2 class="reveal">Discover Related Tools</h2>
+      <div class="related-grid">
+        <a href="#" class="related-card">Convert audio to text</a>
+        <a href="#" class="related-card">Convert video to text</a>
+        <a href="#" class="related-card">Translate audio</a>
+        <a href="#" class="related-card">Translate video</a>
+        <a href="#" class="related-card">AI Subtitle Generator</a>
+        <a href="#" class="related-card">Voice Recorder</a>
+        <a href="#" class="related-card">Audio Trimmer</a>
+        <a href="#" class="related-card">Video Trimmer</a>
+        <a href="#" class="related-card">Audio Compressor</a>
+        <a href="#" class="related-card">Video Compressor</a>
+      </div>
+
+      <div class="discover-more reveal">
+        <p class="discover-label">DISCOVER MORE</p>
+
+        <div class="discover-group">
+          <h3 class="discover-heading">Format Converters</h3>
+          <div class="pill-grid">
+            <a href="#" class="pill">Video Converter <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">MP3 Converter <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">WAV Converter <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">FLAC Converter <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">AVI Converter <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">WEBM Converter <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">MKV Converter <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">FLV Converter <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">MOV Converter <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">MP4 Converter <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">M4A Converter <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">OGG Converter <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">Audio Converter <span class="pill-arrow">›</span></a>
+          </div>
+        </div>
+
+        <div class="discover-group">
+          <h3 class="discover-heading">Format to Format Converters</h3>
+          <div class="pill-grid">
+            <a href="#" class="pill pill-active">MP3 to Video <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">Video to MP3 <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">MP3 to MOV <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">MP3 to MP4 <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">MP3 to M4A <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">Video to Audio <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">AVI to Video <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">Video to OGG <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">Video to M4A <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">AVI to MP3 <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">Video to MP4 <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">M4A to MP3 <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">Video to MOV <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">M4A to Video <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">Video to FLV <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">Video to MKV <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">Video to WEBM <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">WEBM to Video <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">Video to AVI <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">Video to FLAC <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">WEBM to MP3 <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">Video to WAV <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">MP3 to OGG <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">MP3 to Audio <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">MOV to Video <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">MOV to MP3 <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">Audio to MP3 <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">WAV to Video <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">MKV to Video <span class="pill-arrow">›</span></a>
+            <a href="#" class="pill">MKV to MP3 <span class="pill-arrow">›</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <a href="#" class="footer-logo">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="8" fill="#0B5ADB"/>
+            <path d="M10 22V10l14 6-14 6z" fill="#fff"/>
+          </svg>
+          <span>Kactii</span>
+        </a>
+      </div>
+      <div class="footer-inner">
+      <div class="footer-col">
+        <h5>Product and Services</h5>
+        <ul>
+          <li><a href="#">AI Meeting Notetaker</a></li>
+          <li><a href="#">Transcription Services</a></li>
+          <li><a href="#">Subtitles Services</a></li>
+          <li><a href="#">Integrations</a></li>
+          <li><a href="#">API</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Features</h5>
+        <ul>
+          <li><a href="#">Transcribe audio to text</a></li>
+          <li><a href="#">Transcribe video to text</a></li>
+          <li><a href="#">Audio translation</a></li>
+          <li><a href="#">Video translation</a></li>
+          <li><a href="#">Audio Summarizer</a></li>
+          <li><a href="#">Video summarizer</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Free Tools</h5>
+        <ul>
+          <li><a href="#">Free subtitle editor</a></li>
+          <li><a href="#">Subtitle Converter</a></li>
+          <li><a href="#">Video Converter</a></li>
+          <li><a href="#">Audio Converter</a></li>
+          <li><a href="#">Audio Compressor</a></li>
+          <li><a href="#">Video Compressor</a></li>
+          <li><a href="#">Video Trimmer</a></li>
+          <li><a href="#">All tools</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Newsroom</a></li>
+          <li><a href="#">Help desk</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      </div><!-- end footer-inner -->
+    </div><!-- end container -->
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <div class="footer-legal">
+          <a href="#">Terms &amp; Conditions</a>
+          <a href="#">Privacy policy</a>
+          <a href="#">Cookies policy</a>
+          <a href="#">Security policy</a>
+        </div>
+        <div class="footer-social">
+          <a href="#" aria-label="LinkedIn">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" aria-label="X / Twitter">
+            <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- COOKIE BANNER -->
+  <div class="cookie-banner" id="cookieBanner">
+    <p>We use cookies to improve your experience and for marketing.</p>
+    <div class="cookie-actions">
+      <button class="btn-cookie-accept" id="cookieAccept">Accept all</button>
+      <button class="btn-cookie-reject" id="cookieReject">Reject all</button>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
